@@ -10,16 +10,21 @@ const Navbar = () => {
 
     const handleSignOut = () => {
         signOutUser()
-        .then(result => {
-            console.log('user sign out successfully')
-        })
-        .catch(error => console.log("ERROR: ", error.message))
+            .then(result => {
+                console.log('user sign out successfully')
+            })
+            .catch(error => console.log("ERROR: ", error.message))
     }
 
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/login'>Login</NavLink></li>
         <li><NavLink to='/register'>Register</NavLink></li>
+        {
+            user && <>
+                <li><NavLink to='/orders'>Orders</NavLink></li>
+            </>
+        }
     </>
     return (
         <div className="navbar bg-base-100">
@@ -55,12 +60,12 @@ const Navbar = () => {
             <div className="navbar-end">
                 {
                     user ?
-                    <>
-                    <span>{user.email}</span>
-                    <a onClick={handleSignOut} className="btn">Sign Out</a>
-                    </>
-                    : 
-                    <Link to="/login">Login</Link>
+                        <>
+                            <span>{user.email}</span>
+                            <a onClick={handleSignOut} className="btn">Sign Out</a>
+                        </>
+                        :
+                        <Link to="/login">Login</Link>
                 }
             </div>
         </div>
